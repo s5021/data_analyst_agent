@@ -46,3 +46,39 @@ def get_summary(df: pd.DataFrame) -> dict:
     
     # Clean all numpy types for JSON serialization
     return clean_for_json(summary)
+
+def get_correlation_matrix(df: pd.DataFrame) -> dict:
+    """Calculate correlation matrix for numeric columns"""
+    numeric_df = df.select_dtypes(include=['number'])
+    
+    if numeric_df.empty:
+        raise ValueError("No numeric columns found for correlation analysis")
+    
+    if numeric_df.shape[1] < 2:
+        raise ValueError("Need at least 2 numeric columns for correlation analysis")
+    
+    corr_matrix = numeric_df.corr()
+    
+    # Find strong correlations (absolute value > 0.7, excluding diagonal)
+    strong_correlations = []
+    for i in range(len(corr_matrix.columns)):
+        for j in range(i+1, len(corr_matrix.columns)):
+            corr_value = corr_matrix.iloc[i, j]
+            if abs(corr_value) > 0.7:
+                strong_correlations.append({
+                    "column1": corr_matrix.columns[i],
+                    "column2": corr_matrix.columns[j],
+                    "correlation": float(corr_value)
+                })
+    
+    result = {
+        "correlation_matrix": corr_matrix.to_dict(),
+        "numeric_columns": list(numeric_df.columns),
+        "strong_correlations": strong_correlations,
+        "summary": {
+            "total_numeric_columns": len(numeric_df.columns),
+            "strong_correlations_count": len(strong_correlations)
+        }
+    }
+    
+    return clean_for_json(result)

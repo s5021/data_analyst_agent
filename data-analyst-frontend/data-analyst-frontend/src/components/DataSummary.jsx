@@ -1,6 +1,30 @@
+import { useState, useEffect } from 'react'
+import { getCorrelation, downloadData } from '../services/api.js'
 import './DataSummary.css'
 
-export default function DataSummary({ summary }) {
+export default function DataSummary({ summary, fileId }) {
+  const [correlation, setCorrelation] = useState(null)
+  const [downloading, setDownloading] = useState(false)
+  
+  useEffect(() => {
+    if (fileId) {
+      getCorrelation(fileId)
+        .then(setCorrelation)
+        .catch(err => console.log('No correlation data:', err))
+    }
+  }, [fileId])
+  
+  const handleDownload = async () => {
+    setDownloading(true)
+    try {
+      await downloadData(fileId)
+    } catch (err) {
+      console.error('Download failed:', err)
+    } finally {
+      setDownloading(false)
+    }
+  }
+  
   if (!summary) return null
 
   const { shape, columns, dtypes, null_counts, sample, describe } = summary
@@ -12,6 +36,13 @@ export default function DataSummary({ summary }) {
         <span className="summary-topbar-icon">◫</span>
         <span className="summary-topbar-title">Dataset Summary</span>
         <span className="summary-topbar-badge">Pandas</span>
+        <button 
+          className="download-data-btn" 
+          onClick={handleDownload}
+          disabled={downloading}
+        >
+          {downloading ? '⏳ Downloading...' : '↓ Download CSV'}
+        </button>
       </div>
 
       <div className="summary-body">
@@ -88,6 +119,40 @@ export default function DataSummary({ summary }) {
                 </tbody>
               </table>
             </div>
+          </Section>
+        )}
+
+        {correlation && correlation.strong_correlations && (
+          <Section title="Correlation Analysis">
+            <div className="correlation-info">
+              <span className="corr-stat">
+                📊 {correlation.summary.total_numeric_columns} numeric columns analyzed
+              </span>
+              <span className="corr-stat">
+                🔗 {correlation.summary.strong_correlations_count} strong correlations found (|r| &gt; 0.7)
+              </span>
+            </div>
+            
+            {correlation.strong_correlations.length > 0 ? (
+              <div className="correlation-list">
+                {correlation.strong_correlations.map((corr, i) => (
+                  <div key={i} className="correlation-item">
+                    <div className="corr-columns">
+                      <span className="corr-col">{corr.column1}</span>
+                      <span className="corr-arrow">↔</span>
+                      <span className="corr-col">{corr.column2}</span>
+                    </div>
+                    <div className={`corr-value ${corr.correlation > 0 ? 'positive' : 'negative'}`}>
+                      r = {corr.correlation.toFixed(3)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="no-correlation">
+                No strong correlations detected. Try generating a correlation heatmap chart!
+              </div>
+            )}
           </Section>
         )}
 

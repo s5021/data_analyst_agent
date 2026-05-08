@@ -7,6 +7,8 @@ const CHART_TYPES = [
   { id: 'line',    label: 'Line',    icon: '╱', needsY: true  },
   { id: 'scatter', label: 'Scatter', icon: '⊹', needsY: true  },
   { id: 'hist',    label: 'Histogram', icon: '▤', needsY: false },
+  { id: 'pie',     label: 'Pie',     icon: '◕', needsY: false },
+  { id: 'heatmap', label: 'Heatmap', icon: '▦', needsY: false },
 ]
 
 export default function ChartBuilder({ fileId, summary }) {

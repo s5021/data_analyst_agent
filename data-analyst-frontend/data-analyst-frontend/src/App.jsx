@@ -39,7 +39,7 @@ export default function App() {
           <div className="tab-content">
             {activeTab === 'chat'    && <ChatPanel    fileId={uploadedFile.file_id} />}
             {activeTab === 'chart'   && <ChartBuilder fileId={uploadedFile.file_id} summary={summary} />}
-            {activeTab === 'summary' && <DataSummary  summary={summary} />}
+            {activeTab === 'summary' && <DataSummary  summary={summary} fileId={uploadedFile.file_id} />}
           </div>
         )}
       </main>

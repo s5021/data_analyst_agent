@@ -1,0 +1,11 @@
+rank,filename,category,score,years_exp,education,skills,word_count
+1,12011623.pdf,ENGINEERING,0.16827771909585515,3,Masters,"['excel', 'data analysis', 'python', 'sql', 'machine learning']",915
+2,22946204.pdf,AUTOMOBILE,0.13510129895271542,6,Masters,"['excel', 'data analysis', 'java', 'python', 'sql', 'machine learning']",738
+3,11813872.pdf,AGRICULTURE,0.13372222323701644,20,Masters,"['sql', 'java', 'aws', 'python']",1197
+4,83816738.pdf,INFORMATION-TECHNOLOGY,0.12298786209202207,0,Masters,"['aws', 'react', 'excel', 'node', 'java', 'javascript', 'sql']",1227
+5,34953092.pdf,BANKING,0.12194315051478477,0,Masters,"['sql', 'machine learning', 'python']",407
+6,18024825.pdf,FINANCE,0.11487403285840461,0,PhD,"['sql', 'excel', 'data analysis', 'react']",734
+7,18448085.pdf,AUTOMOBILE,0.11484664413125655,0,Masters,"['sql', 'excel', 'data analysis', 'python']",462
+8,12546838.pdf,BUSINESS-DEVELOPMENT,0.11286069316144338,0,Masters,"['excel', 'python']",1075
+9,21156767.pdf,CONSULTANT,0.10862274554440905,6,Masters,"['data analysis', 'java', 'javascript', 'python', 'sql', 'machine learning']",750
+10,24322804.pdf,ENGINEERING,0.10801388838037966,0,Masters,"['aws', 'excel']",768

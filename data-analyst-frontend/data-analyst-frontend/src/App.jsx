@@ -1,15 +1,20 @@
 import { useState } from 'react'
+
 import Sidebar from './components/Sidebar.jsx'
 import UploadZone from './components/UploadZone.jsx'
 import DataSummary from './components/DataSummary.jsx'
 import ChatPanel from './components/ChatPanel.jsx'
 import ChartBuilder from './components/ChartBuilder.jsx'
+import EvaluateChat from './components/EvaluateChat.jsx'
+
 import './App.css'
 
 export default function App() {
-  const [uploadedFile, setUploadedFile] = useState(null)   // { file_id, filename }
-  const [summary, setSummary]           = useState(null)
-  const [activeTab, setActiveTab]       = useState('chat') // 'chat' | 'chart' | 'summary'
+  const [uploadedFile, setUploadedFile] = useState(null)
+  const [summary, setSummary] = useState(null)
+
+  // chat | evaluate | chart | summary
+  const [activeTab, setActiveTab] = useState('chat')
 
   const handleUploadSuccess = (fileData, summaryData) => {
     setUploadedFile(fileData)
@@ -37,12 +42,33 @@ export default function App() {
           <UploadZone onSuccess={handleUploadSuccess} />
         ) : (
           <div className="tab-content">
-            {activeTab === 'chat'    && <ChatPanel    fileId={uploadedFile.file_id} />}
-            {activeTab === 'chart'   && <ChartBuilder fileId={uploadedFile.file_id} summary={summary} />}
-            {activeTab === 'summary' && <DataSummary  summary={summary} fileId={uploadedFile.file_id} />}
+
+            {activeTab === 'chat' && (
+              <ChatPanel fileId={uploadedFile.file_id} />
+            )}
+
+            {activeTab === 'evaluate' && (
+              <EvaluateChat fileId={uploadedFile.file_id} />
+            )}
+
+            {activeTab === 'chart' && (
+              <ChartBuilder
+                fileId={uploadedFile.file_id}
+                summary={summary}
+              />
+            )}
+
+            {activeTab === 'summary' && (
+              <DataSummary
+                summary={summary}
+                fileId={uploadedFile.file_id}
+              />
+            )}
+
           </div>
         )}
       </main>
     </div>
   )
 }
+

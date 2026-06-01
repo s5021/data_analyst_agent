@@ -1,0 +1,65 @@
+.eval-topbar-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.eval-pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: var(--radius);
+  letter-spacing: 0.4px;
+}
+.eval-pill-purple {
+  background: rgba(124,111,255,0.1);
+  color: var(--accent2);
+  border: 1px solid rgba(124,111,255,0.25);
+}
+.eval-pill-green {
+  background: rgba(0,229,160,0.08);
+  color: var(--accent);
+  border: 1px solid rgba(0,229,160,0.2);
+}
+
+.eval-empty-sub {
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 380px;
+  text-align: center;
+  line-height: 1.6;
+  margin-top: -8px;
+}
+
+.eval-loading-state {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 300px;
+  animation: fadeIn 0.2s ease;
+}
+
+.eval-loading-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eval-loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.eval-loading-dot.dot-generator { background: var(--accent2); }
+.eval-loading-dot.dot-evaluator { background: var(--accent);  animation-delay: 0.3s; }
+
+.eval-loading-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}

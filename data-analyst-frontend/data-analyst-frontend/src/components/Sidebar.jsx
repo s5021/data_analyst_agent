@@ -2,6 +2,7 @@ import './Sidebar.css'
 
 const tabs = [
   { id: 'chat',    icon: '◈', label: 'Ask AI' },
+  { id: 'evaluate', icon: '⊕', label: 'Evaluate' },
   { id: 'chart',   icon: '◲', label: 'Charts' },
   { id: 'summary', icon: '◫', label: 'Summary' },
 ]

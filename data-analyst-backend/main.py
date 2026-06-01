@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from routers import upload, analyze, charts
+from routers import upload, analyze, charts, evaluate
 import os
 
 app = FastAPI(title="Data Analyst AI Backend")
@@ -23,3 +24,4 @@ app.mount("/charts", StaticFiles(directory="charts"), name="charts")
 app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
 app.include_router(analyze.router, prefix="/api/analyze", tags=["Analyze"])
 app.include_router(charts.router, prefix="/api/charts", tags=["Charts"])
+app.include_router(evaluate.router,  prefix="/api/evaluate",  tags=["Evaluate"])

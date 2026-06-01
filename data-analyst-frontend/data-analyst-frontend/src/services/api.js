@@ -50,3 +50,10 @@ export const downloadData = async (fileId) => {
   link.remove()
   window.URL.revokeObjectURL(url)
 }
+export const askEvaluated = async (fileId, question) => {
+  const { data } = await api.post('/api/evaluate/ask', {
+    file_id: fileId,
+    question
+  })
+  return data
+}
